@@ -25,7 +25,16 @@ module BgMatchApp
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Don't generate system test files.
-    config.generators.system_tests = nil
+    config.generators do |g|
+      g.test_framework :rspec,
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: false
+    end
+    config.generators.system_tests   = false
+    config.generators.stylesheets    = false
+    config.generators.javascripts    = false
+    config.generators.helper         = false
+    config.assets.initialize_on_precompile = false
   end
 end
