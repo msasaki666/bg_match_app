@@ -33,6 +33,11 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'devise-i18n'
 gem 'rails-i18n', '~> 5.1' 
+gem "gmaps4rails"
+gem "geocoder"
+# gem 'bootstrap-sass', '3.3.7'
+gem 'jquery-rails'
+# gem 'devise-bootstrap-views', '~> 1.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -49,6 +54,7 @@ group :development, :test do
   gem 'annotate'
   gem 'rubocop-airbnb'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
+  gem 'dotenv-rails'
 end
 
 group :development do
