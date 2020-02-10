@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'static_pages#home'
   resources :posts
+  resources :participates, only: [:create, :destroy]
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
+    # get "users/:id", :to => "users/registrations#index" # ユーザー一覧ページ
     get "users/:id", :to => "users/registrations#show" # ユーザー個人ページ
     get "sign_up", :to => "users/registrations#new" # 新規登録ページ
     get "users/:id/edit", :to => "users/registrations#edit" # プロフィール編集ページ

@@ -1,2 +1,15 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<h1>投稿詳細ページ</h1>
+<h3><%= @post.user.email %></h3>
+<h3><%= @post.description %></h3>
+<h3>いいね件数: <%= @post.participates.count %></h3>
+<% if current_user.already_participated?(@post) %>
+  <%= button_to '参加を取り消す', participate_path(@post), method: :delete %>
+<% else %>
+  <%= button_to '参加する', participates_path(@post) %>
+<% end %>
+<h2>参加するユーザー</h2>
+<% @post.participated_users.each do |user| %>
+  <li><%= user.email %></li>
+<% end %>
+
+<%= link_to "ホームへ戻る", posts_path %>

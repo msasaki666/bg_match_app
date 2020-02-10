@@ -5,8 +5,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
-  # def show
-  # end
+  def show
+    @user = User.find(params[:id]).includes(:post)
+  end
 
   # GET /resource/sign_up
   # def new
