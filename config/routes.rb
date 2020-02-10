@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root to: 'static_pages#home'
-  resources :posts
-  resources :participates, only: [:create, :destroy]
+  resources :posts do
+    resources :participates, only: [:create, :destroy]
+  end
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',

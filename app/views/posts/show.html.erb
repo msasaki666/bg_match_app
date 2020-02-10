@@ -3,9 +3,9 @@
 <h3><%= @post.description %></h3>
 <h3>いいね件数: <%= @post.participates.count %></h3>
 <% if current_user.already_participated?(@post) %>
-  <%= button_to '参加を取り消す', participate_path(@post), method: :delete %>
+  <%= button_to '参加を取り消す', post_participate_path(@post), method: :delete %>
 <% else %>
-  <%= button_to '参加する', participates_path(@post) %>
+  <%= button_to '参加する', post_participates_path(@post), method: :post %>
 <% end %>
 <h2>参加するユーザー</h2>
 <% @post.participated_users.each do |user| %>

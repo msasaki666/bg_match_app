@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id]).includes(:user, :participates)
+    @post = Post.includes(:user, :participates).find(params[:id])
     @participate = Participate.new
   end
 

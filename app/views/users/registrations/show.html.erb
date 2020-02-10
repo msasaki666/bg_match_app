@@ -2,7 +2,7 @@
 <h3><%= @user.email %></h3>
 <h2>投稿内容</h2>
 <% @user.posts.each do |post| %>
-  <a href="/posts/<%= post.id %>"><%= post.content %></a>
+  <a href="/posts/<%= post.id %>"><%= post.description %></a>
   <hr>
 <% end %>
 <h3>参加するイベント</h3>
@@ -10,5 +10,6 @@
   <%= post.user.email %>
   <%= post.description %>
 <% end %>
+<%= link_to "ログアウト", logout_path %>
 
 <%= render "users/shared/links" %>
