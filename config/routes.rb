@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :participates, only: [:create, :destroy]
   end
-
+  
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',

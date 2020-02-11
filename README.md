@@ -1,4 +1,9 @@
 # README
+# アプリの概要
+# 機能一覧
+GoogleMapの表示
+複数地点表示
+# 使用技術一覧
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

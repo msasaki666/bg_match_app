@@ -1,13 +1,13 @@
 <h1>ユーザー詳細ページ</h1>
-<h3><%= @user.email %></h3>
-<h2>投稿内容</h2>
+<h3><%= @user.name %></h3>
+<h2>投稿したイベント一覧</h2>
 <% @user.posts.each do |post| %>
-  <a href="/posts/<%= post.id %>"><%= post.description %></a>
+  <a href="/posts/<%= post.id %>"><%= post.name %><%= post.description %></a>
   <hr>
 <% end %>
 <h3>参加するイベント</h3>
 <% @user.participated_posts.each do |post| %>
-  <%= post.user.email %>
+  <%= post.user.name %>
   <%= post.description %>
 <% end %>
 <%= link_to "ログアウト", logout_path %>
