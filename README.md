@@ -1,8 +1,11 @@
 # README
 # アプリの概要
 # 機能一覧
+イベント投稿機能
+イベント削除機能(ログイン中のユーザーの投稿のみ)
 GoogleMapの表示
 複数地点表示
+ページネーショん
 # 使用技術一覧
 
 This README would normally document whatever steps are necessary to get the

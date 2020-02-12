@@ -1,6 +1,12 @@
 <h2>投稿一覧</h2>
+<%= will_paginate %>
 <% @posts.each do |post| %>
-  <a href="/users/<%= post.user.id %>"><%= post.user.email %></a>
-  <p><a href="/posts/<%= post.id %>"><%= post.description %></a></p>
+  <%= link_to post.user.name, user_path(post.user.id) %></br>
+  <%= link_to post.name, post_path(post.id) %>
   (<%= post.participated_users.count %>)
+  <% if current_user.id == post.user.id %>
+    <%= link_to "削除", post_path(post.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+  <% end %>
+  <hr>
 <% end %>
+<%= will_paginate %>

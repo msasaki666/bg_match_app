@@ -1,9 +1,11 @@
 <h1>StaticPages#home</h1>
+<%= link_to "アカウント登録", sign_up_path, class: "btn btn-lg btn-primary" %>
 <p>Find me in app/views/static_pages/home.html.erb</p>
 <%= form_with url: root_path, method: :get do |f|%>
   <%= f.text_field :address %>
   <%= f.submit '地図表示' %>
 <% end %>
+
 <div id="map" style='width: 100%; height: 500px;'></div>
  
   <script type="text/javascript">
@@ -14,7 +16,7 @@
           {
             "lat": <%= post.latitude %>,
             "lng": <%= post.longitude %>,
-        "infowindow": '<p><%= post.name %></p><p><%= post.address %></p><p><%= link_to "イベント詳細" ,post_path(post.id),target: "_blank" %></p><p><%= link_to "Googleマップで見る" ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %></p>'
+            "infowindow": '<p><%= post.name %></p><p><%= post.address %></p><p><%= link_to "イベント詳細" ,post_path(post.id),target: "_blank" %></p><p><%= link_to "Googleマップで見る" ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %></p>'
           }
         ]);
         handler.bounds.extendWith(markers);
@@ -24,4 +26,3 @@
     <% end %>
   </script>
 
-<%= link_to "ログイン", login_path %>

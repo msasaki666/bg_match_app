@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @posts = Post.all.includes(:user)
+    @posts = Post.paginate(page: params[:page]).includes(:user)
   end
 
   def show
@@ -31,6 +31,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    Post.find(params[:id]).destroy
+    flash[:success] = "イベントを削除しました"
+    redirect_to posts_url
   end
 
   private

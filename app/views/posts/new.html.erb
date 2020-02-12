@@ -1,6 +1,6 @@
 <h2>投稿する</h2>
 <%= form_for(@post) do |f| %>
-
+  <%= render 'shared/error_messages' %>
   <%= f.text_field :name, placeholder: "イベント名" %>
   <%= f.date_field :date %>
   <%= f.text_field :address, placeholder: "場所" %>

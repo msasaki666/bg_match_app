@@ -1,0 +1,14 @@
+<h1>ユーザー詳細ページ</h1>
+<h3><%= @user.name %></h3>
+<h2>投稿したイベント一覧</h2>
+<% @user.posts.each do |post| %>
+  <%= link_to post.name, post_path(post.id) %></br>
+  <%=  post.description %>
+  <hr>
+<% end %>
+<h3>参加するイベント</h3>
+<% @user.participated_posts.each do |post| %>
+  <%= link_to post.name, post_path(post.id) %></br>
+  <%= post.date.strftime("%Y年%m月%d日") %><%= link_to post.address ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %></br>
+  <%= post.description %>
+<% end %>
