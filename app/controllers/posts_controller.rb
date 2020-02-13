@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.includes(:user, :participates).find(params[:id])
+    @post = Post.paginate(page: params[:page]).includes(:user, :participates).find(params[:id])
     @participate = Participate.new
   end
 

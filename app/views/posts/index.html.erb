@@ -2,11 +2,16 @@
 <%= will_paginate %>
 <% @posts.each do |post| %>
   <%= link_to post.user.name, user_path(post.user.id) %></br>
-  <%= link_to post.name, post_path(post.id) %>
-  (<%= post.participated_users.count %>)
-  <% if current_user.id == post.user.id %>
+  <%= link_to post.name, post_path(post.id) %></br>
+  開催日:<%= post.date.strftime("%Y年%m月%d日") %></br>
+  参加人数:<%= post.participated_users.count %>人
+  <% if user_signed_in? && current_user.id == post.user.id %>
     <%= link_to "削除", post_path(post.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
   <% end %>
+  </br>
+  <span class="timestamp">
+    <%= time_ago_in_words(post.created_at) %>前に投稿
+  </span>
   <hr>
 <% end %>
 <%= will_paginate %>
