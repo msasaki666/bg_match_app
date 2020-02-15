@@ -1,14 +1,17 @@
-<h1>投稿詳細ページ</h1>
+<h1>イベント詳細ページ</h1>
 <h3><%= link_to @post.user.name, user_path(@post.user.id) %></h3>
 <h3><%= @post.description %></h3>
-<h3>参加人数: <%= @post.participates.count + 1 %>人</h3>
-<% if user_signed_in? && current_user.id != @post.user.id %>
-  <% if current_user.already_participated?(@post) %>
-    <%= button_to '参加を取り消す', post_participate_path(@post), method: :delete %>
-  <% else %>
-    <%= button_to '参加する', post_participates_path(@post), method: :post %>
+<%= image_tag @post.post_image.url if @post.post_image? %>
+<h3 id="participants">参加人数: <%= @post.participates.count + 1 %>人</h3>
+<div id="participate-button">
+  <% if user_signed_in? && current_user.id != @post.user.id %>
+    <% if current_user.already_participated?(@post) %>
+      <%= button_to '参加を取り消す', post_participate_path(@post), method: :delete %>
+    <% else %>
+      <%= button_to '参加する', post_participates_path(@post), method: :post %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 <h2>参加するユーザー</h2>
 <li><%= link_to @post.user.name, user_path(@post.user.id) %></li>
 <% @post.participated_users.each do |user| %>
