@@ -12,7 +12,7 @@
     handler = Gmaps.build('Google', { markers: { maxRandomDistance: 5 } });
       handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
         <% @posts.each do |post| %>
-          <% if !post.latitude.nil? && !post.longitude.nil? %>
+          <% if !post.latitude.nil? || !post.longitude.nil? %>
             markers = handler.addMarkers([
                 {
                   "lat": <%= post.latitude %>,
@@ -27,4 +27,5 @@
         handler.getMap().setZoom(17);
       });
   </script>
+  
 

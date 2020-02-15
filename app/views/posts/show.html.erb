@@ -18,5 +18,6 @@
   <li><%= link_to user.name, user_path(user.id) %></li>
 <% end %>
 <% if user_signed_in? && current_user.id == @post.user.id %>
+  <%= link_to "イベント編集", edit_post_path(@post)  %>  
   <%= link_to "イベント削除", post_path, method: :delete, data: { confirm: "本当に削除しますか？" } %>
 <% end %>
