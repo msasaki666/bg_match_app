@@ -10,19 +10,21 @@
  
   <script type="text/javascript">
     handler = Gmaps.build('Google', { markers: { maxRandomDistance: 5 } });
-    <% @posts.each do |post| %>
       handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
-        markers = handler.addMarkers([
-          {
-            "lat": <%= post.latitude %>,
-            "lng": <%= post.longitude %>,
-            "infowindow": '<p><%= post.name %></p><p><%= post.address %></p><p><%= link_to "イベント詳細" ,post_path(post.id),target: "_blank" %></p><p><%= link_to "Googleマップで見る" ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %></p>'
-          }
-        ]);
+        <% @posts.each do |post| %>
+          <% if !post.latitude.nil? && !post.longitude.nil? %>
+            markers = handler.addMarkers([
+                {
+                  "lat": <%= post.latitude %>,
+                  "lng": <%= post.longitude %>,
+                  "infowindow": '<p><%= post.name %></p><p><%= post.address %></p><p><%= link_to "イベント詳細" ,post_path(post.id),target: "_blank" %></p><p><%= link_to "Googleマップで見る" ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %></p>'
+                }
+              ]);
+          <% end %>
+        <% end %>
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
         handler.getMap().setZoom(17);
       });
-    <% end %>
   </script>
 
