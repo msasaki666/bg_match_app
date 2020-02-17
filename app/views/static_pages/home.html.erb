@@ -1,93 +1,50 @@
-<h1>StaticPages#home</h1>
-<%= link_to "アカウント登録", sign_up_path, class: "btn btn-lg btn-primary" %>
-
-<input id="address" type="textbox" value="大阪">
-<input type="button" value="位置検索" onclick="codeAddress()">
-
+<h1>BGMatch</h1>
+<div class="copy">
+  <p>ふとボードゲームがやりたいと思ったが、一緒にやる相手がいない…</br>
+  そんな時、手軽に近くの相手が探せるアプリです</br>
+  位置情報を有効にすることで、現在地付近のイベントを探すことができます</p>
+</div>
+<div class="input-address">
+  <p>住所から探す</p>
+  <input id="address" type="textbox" value="大阪駅">
+  <input type="button" value="位置検索" onclick="codeAddress()">
+</div>
+<div class="map-container">
 <div id="map" style='width: 100%; height: 500px;'></div>
  
-  <script>
-    handler = Gmaps.build('Google', { markers: { maxRandomDistance: 5 } });
-    handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
-      <% @posts.each do |post| %>
-        <% if !post.latitude.nil? || !post.longitude.nil? %>
-          markers = handler.addMarkers([
-              {
-                "lat": <%= post.latitude %>,
-                "lng": <%= post.longitude %>,
-                "infowindow": '<p><%= post.name %></p><p><%= post.address %></p><p><%= link_to "イベント詳細" ,post_path(post.id),target: "_blank" %></p><p><%= link_to "Googleマップで見る" ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %></p>'
-              }
-            ]);
-        <% end %>
+<script>
+  handler = Gmaps.build('Google', { markers: { maxRandomDistance: 5 } });
+  handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
+    <% @posts.each do |post| %>
+      <% if !post.latitude.nil? || !post.longitude.nil? %>
+        markers = handler.addMarkers([
+            {
+              "lat": <%= post.latitude %>,
+              "lng": <%= post.longitude %>,
+              "infowindow": '<p><%= post.name %></p><p><%= post.address %></p><p><%= link_to "イベント詳細" ,post_path(post.id),target: "_blank" %></p><p><%= link_to "Googleマップで見る" ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %></p>'
+            }
+          ]);
       <% end %>
-        if(navigator.geolocation)
-          navigator.geolocation.getCurrentPosition(displayOnMap);
+    <% end %>
+      if(navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(displayOnMap);
+  });
+
+  function displayOnMap(position){
+    var marker = handler.addMarker({
+      lat: position.coords.latitude,
+      lng: position.coords.longitude,
+      infowindow: "現在地"
     });
+    handler.map.centerOn(marker);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(14);
+  };
+</script>
 
-    function displayOnMap(position){
-      var marker = handler.addMarker({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-        infowindow: "現在地"
-      });
-      handler.map.centerOn(marker);
-    };
-
-
-    //現在地取得
-    //var handler = Gmaps.build('Google');
-    //handler.buildMap({ internal: {id: 'map'} }, function(){
-    //  // be aware chrome >= 50 requires https for geolocation to work
-    //  if(navigator.geolocation)
-    //    navigator.geolocation.getCurrentPosition(displayOnMap);
-    //});
-//
-    //function displayOnMap(position){
-    //  var marker = handler.addMarker({
-    //    lat: position.coords.latitude,
-    //    lng: position.coords.longitude
-    //  });
-    //  handler.map.centerOn(marker);
-    //};
-//
-//
-//
-//
-    //handler = Gmaps.build('Google', { markers: { maxRandomDistance: 5 } });
-    //  handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
-    //    <% @posts.each do |post| %>
-    //      <% if !post.latitude.nil? || !post.longitude.nil? %>
-    //        markers = handler.addMarkers([
-    //            {
-    //              "lat": <%= post.latitude %>,
-    //              "lng": <%= post.longitude %>,
-    //              "infowindow": '<p><%= post.name %></p><p><%= post.address %></p><p><%= link_to "イベント詳細" ,post_path(post.id),target: "_blank" %></p><p><%= link_to "Googleマップで見る" ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %></p>'
-    //            }
-    //          ]);
-    //      <% end %>
-    //    <% end %>
-    //    handler.bounds.extendWith(markers);
-    //    handler.fitMapToBounds();
-    //    handler.getMap().setZoom(15);
-    //  });
-
-
-    //入力から、情報を取得して移動することはできた、違う地図だからマーカーが消える
-    //function codeAddress(){
-    //  var geocoder = new google.maps.Geocoder();
-    // 入力を取得
-    //  var inputAddress = document.getElementById('address').value;
-    //var map = new google.maps.Map(document.getElementById('map'), {zoom: 15});
-    // geocodingしたあとmapを移動
-    //  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-    //    if (status == 'OK') {
-    // map.setCenterで地図が移動
-    //      map.setCenter(results[0].geometry.location);
-    //    } else {
-    //      alert('位置検索は次の理由で失敗しました: ' + status);
-    //    }
-    //  });
-    //}
-  </script>
-  
+<h4 id="participate">イベントに参加したくなったら</h4>
+<div class="buttons">
+  <%= link_to "アカウント登録", sign_up_path, class: "btn btn-lg btn-primary" %>
+  <%= link_to "ログイン", login_path, class: "btn btn-lg btn-primary" %>
+</div>
 

@@ -1,28 +1,33 @@
-<h1>ユーザー詳細ページ</h1>
-<h3><%= @user.name %>さん主催のイベント</h3>
-<% if @user.posts.any? %>
-  <% @user.posts.each do |post| %>
+<% provide(:title, "#{@user.name}の詳細") %>
+<h2>ユーザー詳細ページ</h2>
+<div class="row">
+  <div class="created-events col-md-6 col-xs-6">
+    <h3><%= @user.name %>さん主催のイベント一覧</h3>
+    <% if @user.posts.any? %>
+      <% @user.posts.each do |post| %>
+        <hr>
+        <li class="posts">
+          <span class="name"><%= link_to post.name, post_path(post.id) %></span></br>
+          <%= post.date.strftime("%Y年%m月%d日") %>に<%= link_to post.address ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %>で開催
+          <span class="timestamp"><%= time_ago_in_words(post.created_at) %>前に投稿</span>
+        </li>
+      <% end %>
+    <% else %>
+      <p>まだイベントはありません</p>
+    <% end %>
     <hr>
-    <li id="post-<%= post.id %>">
-      <span class="name"><%= link_to post.name, post_path(post.id) %></span></br>
-      <span class="description"><%= post.description %></span></br>
-      <span class="user"><%= link_to post.user.name, post.user %></span>さんが
-      <span class="timestamp">
-        <%= time_ago_in_words(post.created_at) %>前に投稿
-      </span>
-    </li>
-  <% end %>
-<% else %>
-  <p>まだ投稿はありません</p>
-<% end %>
-<hr>
-<h3>参加するイベント</h3>
-<% if @user.participated_posts.any? %>
-  <% @user.participated_posts.each do |post| %>
-    <%= link_to post.name, post_path(post.id) %></br>
-    <%= post.date.strftime("%Y年%m月%d日") %><%= link_to post.address ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %></br>
-    <%= post.description %>
-  <% end %>
-<% else %>
-  <p>参加するイベントはありません</p>
-<% end %>
+  </div>
+  <div class="participated-events col-md-6 col-xs-6">
+    <h3>参加するイベント</h3>
+    <% if @user.participated_posts.any? %>
+      <% @user.participated_posts.each do |post| %>
+        <hr>
+        <span class="name"><%= link_to post.name, post_path(post.id) %></span></br>
+        <%= post.date.strftime("%Y年%m月%d日") %>に<%= link_to post.address ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %>で開催
+      <% end %>
+      <hr>
+    <% else %>
+      <p>参加するイベントはありません</p>
+    <% end %>
+  </div>
+</div>

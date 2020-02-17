@@ -1,3 +1,4 @@
+<% provide(:title, "#{@post.name}の編集") %>
 <h2>イベントを編集する</h2>
 <%= form_for(@post) do |f| %>
   <%= render 'shared/error_messages' %>

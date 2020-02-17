@@ -1,4 +1,5 @@
-<h2>投稿する</h2>
+<% provide(:title, "イベント作成") %>
+<h2>イベントを作成する</h2>
 <%= form_for(@post) do |f| %>
   <%= render 'shared/error_messages' %>
   <%= f.text_field :name, placeholder: "イベント名" %>

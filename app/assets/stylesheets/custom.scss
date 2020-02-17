@@ -46,12 +46,12 @@ h1 {
 }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 26px;
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $gray-light;
+  //color: $gray-light;
 }
 
 p {
@@ -84,24 +84,29 @@ footer {
   padding-top: 5px;
   border-top: 1px solid $gray-medium-light;
   color: $gray-light;
-  a {
-    color: $gray;
-    &:hover {
-      color: $gray-darker;
-    }
-  }
-  small {
-    float: left;
-  }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 15px;
-    }
-  }
+  text-align: center;
 }
+/* staticpages home */
+
+.copy{
+  text-align: center;
+}
+
+#participate{
+  width: 255px;
+  margin: 0 auto;
+}
+
+.buttons{
+  text-align: center;
+}
+
+/* users show */
+
+.posts{
+  list-style: none; 
+}
+
 
 /* miscellaneous */
 
@@ -250,8 +255,13 @@ input {
   li {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
+    img {
+      float: left;
+      margin-right: 10px;
+      margin-top: 5px;
+    }
   }
-  .user {
+  .name {
     margin-top: 5em;
     padding-top: 0;
   }
@@ -268,11 +278,6 @@ input {
     display: block;
     margin-left: 60px;
   }
-  .gravatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
-  }
 }
 
 aside {
@@ -287,4 +292,12 @@ span.picture {
   input {
     border: 0;
   }
+}
+
+.participated-users li{
+  font-size: 20px;
+}
+
+.edit-buttons{
+  text-align: center;
 }

@@ -1,5 +1,7 @@
+<% provide(:title, "#{@post.name}の詳細") %>
 <h1>イベント詳細ページ</h1>
 <h3>イベント主催者: <%= link_to @post.user.name, user_path(@post.user.id) %></h3>
+<h3>日時: <%= @post.date.strftime("%Y年%m月%d日") %></h3>
 <h3>イベント詳細: <%= @post.description %></h3>
 <%= image_tag @post.post_image.url if @post.post_image? %>
 <h3 id="participants">参加人数: <%= @post.participates.count + 1 %>人</h3>
@@ -31,14 +33,18 @@
         });
     </script>
 <% else %>
-  <h3>位置情報はありません</h3>
+  <h3>位置情報を表示できません</h3>
 <% end %>
 <h2>参加するユーザー</h2>
-<li><%= link_to @post.user.name, user_path(@post.user.id) %></li>
-<% @post.participated_users.each do |user| %>
-  <li><%= link_to user.name, user_path(user.id) %></li>
-<% end %>
-<% if user_signed_in? && current_user.id == @post.user.id %>
-  <%= link_to "イベント編集", edit_post_path(@post)  %>  
-  <%= link_to "イベント削除", post_path, method: :delete, data: { confirm: "本当に削除しますか？" } %>
-<% end %>
+<div class="participated-users">
+  <li><%= link_to @post.user.name, user_path(@post.user.id) %></li>
+  <% @post.participated_users.each do |user| %>
+    <li><%= link_to user.name, user_path(user.id) %></li>
+  <% end %>
+</div>
+<div class="edit-buttons">
+  <% if user_signed_in? && current_user.id == @post.user.id %>
+    <%= link_to "イベント編集", edit_post_path(@post), class: "btn btn-info" %>  
+    <%= link_to "イベント削除", post_path, method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
+  <% end %>
+</div>
