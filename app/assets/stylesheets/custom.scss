@@ -276,7 +276,6 @@ input {
   .timestamp {
     color: $gray-light;
     display: block;
-    margin-left: 60px;
   }
 }
 
@@ -300,4 +299,8 @@ span.picture {
 
 .edit-buttons{
   text-align: center;
+}
+
+.post-image{
+  float: right;
 }
