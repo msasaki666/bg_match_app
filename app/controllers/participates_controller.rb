@@ -3,12 +3,20 @@ class ParticipatesController < ApplicationController
 
   def create
     @participate = current_user.participates.create(post_id: params[:post_id])
-    redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    redirect_to request.referrer || root_url
   end
   
   def destroy
     @participate = Participate.find_by(post_id: params[:post_id], user_id: current_user.id)
     @participate.destroy
-    redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    redirect_to request.referrer || root_url
   end
 end

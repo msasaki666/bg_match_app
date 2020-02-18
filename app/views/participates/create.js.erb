@@ -1,0 +1,4 @@
+// XHR,500エラーで保留
+$("#participate-buttons").html("<%= escape_javascript(render('posts/not_participate_button')) %>");
+$("#participants").html("参加人数: <%= @post.participates.count + 1 %>人");
+$("#participated-users").html("<%= escape_javascript(render('posts/participated_users')) %>");

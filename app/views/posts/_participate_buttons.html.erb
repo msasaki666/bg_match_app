@@ -1,0 +1,8 @@
+<% if user_signed_in? && current_user.id != @post.user.id %>
+  <% if current_user.already_participated?(@post) %>
+    <%= render 'not_participate_button' %>
+  <% else %>
+    <%= render 'participate_button' %>
+  <% end %>
+<% end %>
+

@@ -1,0 +1,45 @@
+<div id="map" style='width: 100%; height: 500px;'></div>
+<script>
+  handler = Gmaps.build('Google', { markers: { maxRandomDistance: 5 } });
+  handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
+    <% @posts.each do |post| %>
+      <% if !post.latitude.nil? || !post.longitude.nil? %>
+        markers = handler.addMarkers([
+            {
+              "lat": <%= post.latitude %>,
+              "lng": <%= post.longitude %>,
+              "infowindow": '<p><%= post.name %></p><p><%= post.address %></p><p><%= link_to "イベント詳細" ,post_path(post.id),target: "_blank" %></p><p><%= link_to "Googleマップで見る" ,"https://maps.google.co.jp/maps?q=loc:#{post.latitude},#{post.longitude}&iwloc=J",target: "_blank" %></p>'
+            }
+          ]);
+      <% end %>
+    <% end %>
+      if(navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(displayOnMap);
+  });
+
+  function displayOnMap(position){
+    var marker = handler.addMarker({
+      lat: position.coords.latitude,
+      lng: position.coords.longitude,
+      infowindow: "現在地"
+    });
+    handler.map.centerOn(marker);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(14);
+  };
+
+  function codeAddress(){
+    //geocoder objectの生成
+    var geocoder = new google.maps.Geocoder();
+    //入力を取得
+    var inputAddress = document.getElementById('address').value;
+    //geocoding
+    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+      handler.map.centerOn(results[0].geometry.location);
+    } else {
+      alert('位置検索は次の理由で失敗しました: ' + status);
+    }
+  });
+}
+</script>

@@ -5,6 +5,10 @@ class CreateParticipates < ActiveRecord::Migration[5.1]
       t.references :user, foreign_key: true
 
       t.timestamps
+
+      t.index :user_id
+      t.index :post_id
+      t.index [:user_id, :post_id], unique: true
     end
   end
 end

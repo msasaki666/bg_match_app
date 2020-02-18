@@ -1,0 +1,5 @@
+<li><%= link_to @post.user.name, user_path(@post.user.id) %></li>
+<% @post.participated_users.each do |user| %>
+  <li><%= link_to user.name, user_path(user.id) %></li>
+<% end %>
+
