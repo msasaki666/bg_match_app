@@ -20,7 +20,7 @@
 ・イベント開催時間投稿機能
 ・参加制限機能(参加人数や開催日時による制限、作成したイベントの参加締め切り)
 ・イベント位置情報投稿機能改善(地図から選べるようにする)
-
+・Googlemapのテスト
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
