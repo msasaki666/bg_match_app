@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   mount_uploader :post_image, PostImageUploader
   has_many :participates, dependent: :destroy
   has_many :participated_users, through: :participates, source: :user
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 500 }
   validates :date, presence: true
   validates :address, presence: true
