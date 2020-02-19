@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
   describe "Userリソース" do
-    let(:user) { create(:user) }
+    let(:user) { create(:user)}
     let(:post) { create(:post, user: user )}
-    
+
     describe "ユーザー詳細ページ(users#show)" do
       before do
         get user_path(user.id)
