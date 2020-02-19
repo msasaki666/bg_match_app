@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "ApplicationHelper" do
   include ApplicationHelper
   describe "ページタイトル" do
-    let(:post) { create(:post) }
+    let(:post) { build(:post) }
 
     it "base_titleのみを表示" do
       expect(full_title("")).to eq "BGMatch"

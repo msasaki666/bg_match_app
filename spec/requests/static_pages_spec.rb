@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :request do
-
   describe "トップページ(staticpages#home)" do
     let(:user) { create(:user) }
 
