@@ -22,32 +22,23 @@ RSpec.describe "Users", type: :request do
   describe "ユーザー情報編集ページ(registrations#edit)" do
     let(:user) { create(:user) }
 
-    before do
+    it "リクエストが成功する" do
       sign_in user
       get edit_path
-    end
-
-    it "リクエストが成功する" do
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "アカウント登録ページ(registrations#new)" do
-    before do
-      get sign_up_path
-    end
-
     it "リクエストが成功する" do
+      get sign_up_path
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "ログインページ(sessions#new)" do
-    before do
-      get login_path
-    end
-
     it "リクエストが成功する" do
+      get login_path
       expect(response).to have_http_status(:success)
     end
   end
