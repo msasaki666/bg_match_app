@@ -1,18 +1,20 @@
 <% provide(:title, "#{@post.name}の詳細") %>
 <h1>イベント詳細ページ</h1>
+<div class="post-image">
+  <%= image_tag @post.post_image.url, :size =>'230x230' if @post.post_image? %>
+</div>
 <h3>イベント主催者: <%= link_to @post.user.name, user_path(@post.user.id) %></h3>
 <h3>日時: <%= @post.date.strftime("%Y年%m月%d日") %></h3>
 <h3>イベント詳細: <%= @post.description %></h3>
-<%= image_tag @post.post_image.url, class: "post-image" if @post.post_image? %>
 <h3 id="participants">参加人数: <%= @post.participates.count + 1 %>人</h3>
+<h3>参加するユーザー</h3>
+<div class="participated-users">
+  <%= render 'participated_users' %>
+</div>
 <div id="participate-buttons">
   <%= render 'participate_buttons' %>
 </div>
 <%= render 'event_address' %>
-<h2>参加するユーザー</h2>
-<div class="participated-users">
-  <%= render 'participated_users' %>
-</div>
 <div class="edit-buttons">
   <% if user_signed_in? && current_user.id == @post.user.id %>
     <%= link_to "イベント編集", edit_post_path(@post), class: "btn btn-info" %>  
