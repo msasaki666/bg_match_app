@@ -1,7 +1,7 @@
 <h1>BGMatch</h1>
 <div class="copy">
   <p>ふとボードゲームがやりたいと思ったが、一緒にやる相手がいない…</br>
-  そんな時、手軽に近くの相手が探せるアプリです</br>
+  そんな時、手軽に近くのイベントが探せるアプリです</br>
   位置情報を有効にすることで、現在地付近のイベントを探すことができます</p>
 </div>
 <div class="input-address">
@@ -12,8 +12,10 @@
 <div class="top-map">
   <%= render 'top_map' %>
 </div>
-<h4 id="participate">イベントに参加したくなったら</h4>
-<div class="buttons">
-  <%= link_to "アカウント登録", sign_up_path, class: "btn btn-md btn-primary" %>
-  <%= link_to "ログイン", login_path, class: "btn btn-md btn-primary" %>
-</div>
+<% if !user_signed_in? %>
+  <div class="buttons">
+    <h4>イベントに参加したくなったら</h4>
+    <%= link_to "アカウント登録", sign_up_path, class: "btn btn-md btn-primary" %>
+    <%= link_to "ログイン", login_path, class: "btn btn-md btn-primary" %>
+  </div>
+<% end %>
