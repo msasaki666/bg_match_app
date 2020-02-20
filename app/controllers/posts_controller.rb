@@ -2,11 +2,11 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @posts = Post.paginate(page: params[:page]).includes(:user)
+    @posts = Post.includes(:user, participates: [:user]).paginate(page: params[:page])
   end
 
   def show
-    @post = Post.paginate(page: params[:page]).includes(:user, :participates).find(params[:id])
+    @post = Post.includes(:user, participates: [:user]).paginate(page: params[:page]).find(params[:id])
     @participate = Participate.new
   end
 
