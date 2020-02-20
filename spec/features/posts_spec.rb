@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature "Posts", type: :feature do
-  let(:user) { create(:user) }
-  let(:another_user) { create(:user) }
-  let!(:another_post) { create(:post, user: another_user)}
-  let!(:post) { create(:post, user: user)}
+  given(:user) { create(:user) }
+  given(:another_user) { create(:user) }
+  given!(:another_post) { create(:post, user: another_user)}
+  given!(:post) { create(:post, user: user)}
   
-
   before do
     sign_in user
   end
