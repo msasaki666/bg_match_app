@@ -1,19 +1,5 @@
 version: '2'
 services:
-  bg_match_app:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    environment:
-      RAILS_ENV: development
-      DATABASE_URL: mysql2://root:pass@mysql:3306
-      MYSQL_ROOT_PASSWORD: 'pass'
-    ports:
-      - '3000:3000'
-    volumes:
-      - .:/usr/src/bg_match_app
-      - bundle:/bundle
-    links:
-      - mysql
   mysql:
     image: mysql:5.7.10
     environment:
@@ -22,6 +8,22 @@ services:
       - '3306:3306'
     volumes:
       - mysql-data:/var/lib/mysql
+  bg_match_app:
+    build: .
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: mysql2://root:pass@mysql:3306
+      MYSQL_ROOT_PASSWORD: 'pass'
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mysql
+    volumes:
+      - .:/usr/src/bg_match_app
+      - bundle:/bundle
+    links:
+      - mysql
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
 volumes:
   mysql-data:
     driver: local
