@@ -7,9 +7,8 @@ WORKDIR $APP_ROOT
 RUN apt-get update && \
     apt-get install -y nodejs \
                        mariadb-client \
-                       postgresql-client \
-                       sqlite3 \
                        --no-install-recommends && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 COPY Gemfile $APP_ROOT
