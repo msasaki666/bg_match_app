@@ -11,9 +11,10 @@ services:
   bg_match_app:
     build: .
     environment:
-      RAILS_ENV: development
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: 'pass'
+      MYSQL_HOST: mysql
       DATABASE_URL: mysql2://root:pass@mysql:3306
-      MYSQL_ROOT_PASSWORD: 'pass'
     ports:
       - '3000:3000'
     depends_on:
