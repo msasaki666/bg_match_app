@@ -1,6 +1,8 @@
 <% provide(:title, "イベント一覧") %>
 <h2>イベント一覧</h2>
-<%= will_paginate %>
+<div class="paginate">
+  <%= will_paginate %>
+</div>
 <hr>
 <% @posts.each do |post| %>
   <div class="post-item">
@@ -10,15 +12,20 @@
     <%= link_to post.user.name, user_path(post.user.id) %></br>
     <%= link_to post.name, post_path(post.id) %></br>
     開催日:<%= post.date.strftime("%Y年%m月%d日") %></br>
-    参加人数:<%= post.participated_users.count %>人
-    <% if user_signed_in? && current_user.id == post.user.id %>
-      <%= link_to "削除", post_path(post.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-    <% end %>
-    </br>
+    参加人数:<%= post.participated_users.count %>人</br>
     <span class="timestamp">
       <%= time_ago_in_words(post.created_at) %>前に投稿
     </span>
+    </br>
+    <% if user_signed_in? && current_user.id == post.user.id %>
+      <%= link_to "編集", edit_post_path(post) %>
+      <%= link_to "削除", post_path(post.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+    <% end %>
+    
+    
     <hr>
   </div>
 <% end %>
-<%= will_paginate %>
+<div class="paginate">
+  <%= will_paginate %>
+</div>
