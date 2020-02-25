@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.feature "Posts", type: :feature do
   given(:user) { create(:user) }
   given(:another_user) { create(:user) }
-  given!(:another_post) { create(:post, user: another_user)}
-  given!(:post) { create(:post, user: user)}
-  
+  given!(:another_post) { create(:post, user: another_user) }
+  given!(:post) { create(:post, user: user) }
+
   before do
     sign_in user
   end
@@ -15,11 +15,10 @@ RSpec.feature "Posts", type: :feature do
 
     expect(page).to have_selector 'a', text: another_user.name
     expect(page).to have_selector 'a', text: another_post.name
-    
+
     within page.first ".post-item" do
       expect(page).to have_selector 'a', text: user.name
       expect(page).to have_selector 'a', text: post.name
-      save_and_open_page
       expect(page).to have_selector 'a', text: "削除"
       click_on post.name
     end
@@ -44,7 +43,7 @@ RSpec.feature "Posts", type: :feature do
   #   expect(current_path).to eq posts_path
   #   expect(page).to have_selector 'div.alert.alert-success', text: "投稿に成功しました"
   #   expect(page).to have_css ".post-item"
-  #   
+  #
   #   within page.first ".post-item" do
   #     expect(page).to have_selector 'a', text: user.name
   #     expect(page).to have_selector 'a', text: "example"

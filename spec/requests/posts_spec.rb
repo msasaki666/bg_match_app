@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Posts", type: :request do
   describe "Postリソース" do
     let(:user) { create(:user) }
-    let(:post) { create(:post, user: user)}
+    let(:post) { create(:post, user: user) }
 
     describe "イベント一覧ページ(posts#index)" do
       it "リクエストが成功する" do

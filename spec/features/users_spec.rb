@@ -10,7 +10,7 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_css ".top-map"
     expect(page).to have_css ".buttons"
     expect(page).to have_css "footer"
-    
+
     within "header" do
       expect(page).to have_selector 'a#logo', text: "BGMatch"
       expect(page).to have_selector 'a', text: "ホーム"
@@ -54,7 +54,7 @@ RSpec.feature "Users", type: :feature do
     within "footer" do
       expect(page).to have_selector 'small', text: "BGMatch by Motoaki Sasaki"
     end
-    
+
     within "header" do
       click_on "アカウント"
       expect(page).to have_selector 'a', text: "プロフィール"
@@ -77,4 +77,3 @@ RSpec.feature "Users", type: :feature do
     expect(page).to have_selector 'div.alert.alert-notice', text: "ログインしました。"
   end
 end
-

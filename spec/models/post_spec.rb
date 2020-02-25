@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  let(:post) { create(:post)}
+  let(:post) { create(:post) }
 
   describe "バリデーション" do
     describe "nameカラム" do

@@ -4,12 +4,12 @@ Rails.application.routes.draw do
   resources :posts do
     resources :participates, only: [:create, :destroy]
   end
-  
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
     passwords: 'users/passwords',
-    #omniauth_callbacks: 'users/omniauth_callbacks',
+    # omniauth_callbacks: 'users/omniauth_callbacks',
   }
 
   devise_scope :user do

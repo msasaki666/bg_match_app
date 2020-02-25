@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
-  let(:post) { create(:post, user: user)}
-  let(:participate) { create(:participate, user: user, post: post)}
+  let(:post) { create(:post, user: user) }
+  let(:participate) { create(:participate, user: user, post: post) }
 
   describe "バリデーション" do
     it "nameがなければ無効な状態である" do
