@@ -6,8 +6,6 @@ class CreateParticipates < ActiveRecord::Migration[5.1]
 
       t.timestamps
 
-      t.index :user_id
-      t.index :post_id
       t.index [:user_id, :post_id], unique: true
     end
   end
