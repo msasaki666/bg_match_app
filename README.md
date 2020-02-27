@@ -11,7 +11,7 @@
 ・ユーザー認証システム(アカウント登録、ログインログアウト、アカウント情報編集、アカウント削除(devise))  
 ・イベント投稿機能(ジオコーディング機能あり)  
 ・イベント参加機能(他のユーザーのイベントのみ、自分主催のイベントは強制参加)  
-・画像投稿および表示機能(carrierwave、mini_magick)
+・画像投稿および表示機能(carrierwave、mini_magick)  
 ・イベント削除機能(ログイン中の自分の投稿のみ)  
 ・ページネーション(will_paginate、bootstrap-will_paginate)  
 ・日本語化(devise-i18n、rails-i18n)  
