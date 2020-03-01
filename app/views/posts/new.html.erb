@@ -9,7 +9,7 @@
   <%= f.label :address %><br />
   <%= f.text_field :address, placeholder: "東京駅、など" %>
   <%= f.label :description %><br />
-  <%= f.text_area :description, placeholder: "どんなゲームをする、など" %>
+  <%= f.text_area :description, placeholder: "どんなゲームをする、など", wrap: "hard", cols: "100", rows: "5" %>
   イベントのイメージ画像
   <span class="picture">
     <%= f.file_field :post_image, accept: 'image/jpeg,image/gif,image/png' %>

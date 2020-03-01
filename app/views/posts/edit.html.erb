@@ -5,7 +5,7 @@
   <%= f.text_field :name, placeholder: "イベント名" %>
   <%= f.date_field :date %>
   <%= f.text_field :address, placeholder: "場所" %>
-  <%= f.text_area :description, placeholder: "イベント詳細" %>
+  <%= f.text_area :description, placeholder: "イベント詳細", wrap: "hard", cols: "100", rows: "5" %>
   イベントのイメージ画像
   <span class="picture">
     <%= f.file_field :post_image, accept: 'image/jpeg,image/gif,image/png' %>

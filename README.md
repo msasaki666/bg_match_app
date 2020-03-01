@@ -15,7 +15,7 @@
 ・イベント削除機能(ログイン中の自分の投稿のみ)  
 ・ページネーション(will_paginate、bootstrap-will_paginate)  
 ・日本語化(devise-i18n、rails-i18n)  
-・静的解析(rubocop、rubocop-airbnb)  
+・静的解析(rubocop、rubocop-airbnb) 
 # テスト
 Rspec(request spec、feature spec、model spec)
 # 使用技術
@@ -23,6 +23,8 @@ Rspec(request spec、feature spec、model spec)
 ・Ruby on Rails 5.1.7  
 ・MySQL 5.7  
 ・Nginx  
-・AWS(EC2、S3、VPC)  
+・Unicorn  
+・AWS(EC2、S3、VPC、ALB、ACM、Route 53)  
 ・Docker  
 ・GitHub  
+・SSL通信

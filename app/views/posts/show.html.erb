@@ -1,15 +1,18 @@
 <% provide(:title, "#{@post.name}の詳細") %>
 <h1><%= @post.name %></h1>
-<div class="post-image">
-  <%= image_tag @post.post_image.url, :size =>'280x280' if @post.post_image? %>
-</div>
-<h3>イベント主催者: <%= link_to @post.user.name, user_path(@post.user.id) %></h3>
-<h3>日時: <%= @post.date.strftime("%Y年%m月%d日") %></h3>
-<h3>イベント詳細: <%= @post.description %></h3>
-<h3 id="participants">参加人数: <%= @post.participates.count + 1 %>人</h3>
-<h3>参加するユーザー</h3>
-<div class="participated-users">
-  <%= render 'participated_users' %>
+<div class="row">
+  <div class="post-details col-md-8 col-xs-8">
+    <h3>イベント主催者: <%= link_to @post.user.name, user_path(@post.user.id) %></h3>
+    <h3>日時: <%= @post.date.strftime("%Y年%m月%d日") %></h3>
+    <h4><%= safe_join(@post.description.split("\n"), tag(:br)) %></h4>
+    <h3>参加するユーザー ( <%= @post.participates.count + 1 %>人 )</h3>
+    <div class="participated-users">
+      <%= render 'participated_users' %>
+    </div>
+  </div>
+  <div class="post-image col-md-4 col-xs-4">
+    <%= image_tag @post.post_image.url, :size =>'280x280' if @post.post_image? %>
+  </div>
 </div>
 <div id="participate-buttons">
   <%= render 'participate_buttons' %>
