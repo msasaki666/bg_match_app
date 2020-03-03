@@ -12,9 +12,6 @@ jobs:
       - run:
           name: Dockerコンテナの起動
           command: docker-compose up -d
-        - run:
-          name: sleep for waiting launch db
-          command: sleep 1
       - run:
           name: テストデータベース作成とマイグレーション
           command: docker-compose exec bg_match_app bundle exec rails db:create db:migrate RAILS_ENV=test
