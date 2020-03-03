@@ -13,7 +13,7 @@ jobs:
           name: Dockerコンテナの起動
           command: docker-compose up -d
       - run:
-          name: テストデータベース作成
+          name: テストデータベース作成とマイグレーション
           command: docker-compose exec bg_match_app bundle exec rails db:create db:migrate RAILS_ENV=test
       - run:
           name: RSpec実行
