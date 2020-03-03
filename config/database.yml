@@ -11,6 +11,8 @@ development:
 
 test:
   <<: *default
+  username: root
+  password:
   database: bg_match_app_test
 
 production:
