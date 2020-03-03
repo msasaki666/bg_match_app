@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.feature "Users", type: :feature do
+  given(:user) { create(:user) }
+  given(:another_user) { create(:user, name: "じろう") }
+  given!(:post) { create(:post, latitude: nil, longitude: nil, user: user) }
+  given!(:another_post) { create(:post, user: another_user) }
+  given!(:user_participate) { create(:participate, user: user, post: another_post) }
+  given!(:another_participate) { create(:participate, user: another_user, post: post) }
+  
   scenario "アカウント登録とログインログアウト" do
     visit root_path
     expect(page).to have_title "BGMatch"
@@ -75,5 +82,65 @@ RSpec.feature "Users", type: :feature do
     click_button "ログイン"
     expect(current_path).to eq root_path
     expect(page).to have_selector 'div.alert.alert-notice', text: "ログインしました。"
+  end
+
+  scenario "ユーザー詳細ページ" do
+    sign_in user
+    visit user_path(user.id)
+
+    within ".created-events" do
+      expect(page).to have_selector 'a', text: post.name
+    end
+
+    within ".participated-events" do
+      expect(page).to have_selector 'a', text: another_post.name
+      click_on another_post.name
+    end
+
+    expect(current_path).to eq post_path(another_post.id)
+    expect(page).to have_selector 'h4', text: another_post.description
+    expect(page).to have_selector 'h3', text: "参加するユーザー ( 2人 )"
+    expect(page).to have_css "#map"
+    expect(page).not_to have_selector 'a.btn.btn-info', text: "イベント編集"
+    expect(page).not_to have_selector 'a.btn.btn-danger', text: "イベント削除"
+
+    within ".participated-users" do
+      expect(page).to have_selector 'a', text: user.name
+      expect(page).to have_selector 'a', text: another_user.name
+    end
+
+    click_on "参加を取り消す"
+
+    within ".participated-users" do
+      expect(page).not_to have_selector 'a', text: user.name
+    end
+
+    expect(page).to have_selector 'h3', text: "参加するユーザー ( 1人 )"
+    click_on "アカウント"
+    click_on "プロフィール"
+    expect(current_path).to eq user_path(user.id)
+
+    within ".participated-events" do
+      expect(page).not_to have_selector 'a', text: another_post.name
+      expect(page).to have_selector 'p', text: "参加するイベントはありません"
+    end
+
+    within ".created-events" do
+      expect(page).to have_selector 'a', text: post.name
+      click_on post.name
+    end
+
+    expect(current_path).to eq post_path(post.id)
+    expect(page).to have_selector 'h1', text: post.name
+    expect(page).to have_selector 'h3', text: "位置情報を表示できません"
+    expect(page).to have_selector 'a.btn.btn-info', text: "イベント編集"
+    expect(page).to have_selector 'a.btn.btn-danger', text: "イベント削除"
+    click_on "イベント編集"
+    expect(current_path).to eq edit_post_path(post.id)
+    expect(page).to have_css "input#post_name"
+    expect(page).to have_css "input#post_date"
+    expect(page).to have_css "input#post_address"
+    expect(page).to have_css "textarea#post_description"
+    expect(page).to have_css "input#post_post_image"
   end
 end

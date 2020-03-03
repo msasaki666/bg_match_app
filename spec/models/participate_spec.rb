@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Participate, type: :model do
   describe "participateモデル" do
-    let(:participate) { create(:participate, user_id: 1, post_id: 1) }
+    let(:user) { create(:user) }
+    let(:another_user) { create(:user) }
+    let(:post) { create(:post, user: user) }
+    let(:participate) { create(:participate, user: another_user, post: post) }
 
     it "有効な状態である" do
       expect(participate).to be_valid
