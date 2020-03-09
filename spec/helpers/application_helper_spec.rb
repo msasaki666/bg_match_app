@@ -10,7 +10,7 @@ RSpec.describe "ApplicationHelper" do
     end
 
     it "full_titleを表示" do
-      expect(full_title(post.name)).to eq "MyString - BGMatch"
+      expect(full_title(post.name)).to eq "MyName - BGMatch"
     end
   end
 end
