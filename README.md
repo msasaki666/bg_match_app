@@ -15,7 +15,8 @@
 ・イベント削除機能(ログイン中の自分の投稿のみ)  
 ・ページネーション(will_paginate、bootstrap-will_paginate)  
 ・日本語化(devise-i18n、rails-i18n)  
-・静的解析(rubocop、rubocop-airbnb) 
+・静的解析(rubocop、rubocop-airbnb)
+・レスポンシブ対応(bootstrap)  
 # テスト
 Rspec(request spec、feature spec、model spec)
 # 使用技術
