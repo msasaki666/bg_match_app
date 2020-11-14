@@ -15,4 +15,5 @@ test:
 
 production:
   <<: *default
+  database: bg_match_app_production
   url: <%= ENV['CLEARDB_DATABASE_URL']&.sub('mysql://', 'mysql2://') %>
