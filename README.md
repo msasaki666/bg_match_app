@@ -2,7 +2,7 @@
 手軽にボードゲームのイベントを開催または探すことができるサービスです。  
 位置情報付きのイベントを作成することができます。  
 また、GoogleMapを用いて現在地または指定した場所周辺のイベントを探して、参加することができます。  
-https://www.bgmatch.work/
+https://bg-match-app.herokuapp.com/
 # 機能一覧(使用したgem、技術など)
 ・GoogleMapの表示(ホームページ、イベント詳細ページ(GoogleMapsforRails、Maps JavaScript API))  
 ・GoogleMap上への複数地点表示機能  
